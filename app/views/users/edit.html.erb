@@ -1,0 +1,38 @@
+<% provide(:title, "Edit user") %>
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <% if flash[:error] %>
+          <h2><%= flash[:error] %>
+          <% flash[:error] = nil %>
+          </h2>
+      <% end %>
+      <ul>
+       <li> <%= f.label :username %>
+      <%= f.text_field :username %>
+      </li>
+      <li>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      </li>
+      <li>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      </li>
+       </ul>
+      <ul>
+      <% unless @user.avatar.attachment.nil? %>
+         <%= image_tag @user.avatar %>
+      <% else %>
+        <img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg">
+      <% end %>
+      </ul>
+       <ul> <%= f.file_field :avatar %> </ul>
+      <ul>  <%= f.submit "Save changes", class: "btn btn-large btn-primary" %> </ul>
+    <% end %>
+
+    
+  </div>
+</div>
