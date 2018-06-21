@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 	attr_accessor :remember_token
+	
 	has_secure_password
 	has_one_attached :avatar
 	has_many :posts 	
@@ -10,9 +11,14 @@ class User < ApplicationRecord
 	validates_email_format_of :email, message: 'The e-mail format is not correct!'
 	validates :username, :password, format: { with: /\A[0-9a-zA-Z_.\-]+\Z/, message: "Only alphanumeric characters, and -_."}
 	validates :username, length: {maximum: 30}
-
+	before_create :confirmation_token
 	before_create {self.email = email.downcase}
 	before_create {self.username = username.downcase}
+	def email_activate
+    	self.email_confirmed = true
+    	self.confirm_token = nil
+    	save!(:validate => false)
+  	end
 	def User.digest(string)
     	cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
      	BCrypt::Password.create(string, cost: cost)
@@ -33,5 +39,11 @@ class User < ApplicationRecord
  	def forget
  		update_attribute(:remember_digest, nil)
  	end
+ 	private
+	def confirmation_token
+      if self.confirm_token.blank?
+          self.confirm_token = SecureRandom.urlsafe_base64.to_s
+      end
+    end
  
 end
