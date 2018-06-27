@@ -1,9 +1,19 @@
+<div class="row">
+ 	<div class="col-md-6 offset-md-3">
 
-<%= form_for(:session, url: login_path) do |f| %>
-	<%= f.text_field :login, placeholder: "username or email" %>
-	<%= f.password_field :password, placeholder: "password" %>
-	<%= f.submit "Login" %>
-	<%= f.check_box :remember_me %>
- 	<span>Remember me on this computer</span>
-
-<% end %>	
+ 		<h1>Sign in</h1>
+ 		<%= form_for(:session, url: login_path) do |f|%>
+ 		  <div class="form-group">
+ 				<%= f.text_field :login, placeholder: "username or email", class: "form-control" %>
+ 			</div>
+ 			<div class="form-group">
+ 				<%= f.password_field :password, placeholder: "password", class: "form-control" %>
+ 			</div>
+ 			<div class="form-group">
+ 				<%= f.check_box :remember_me %>
+ 				<span>Remember me on this computer</span>
+ 			</div class="navbar-nav ml-auto">
+ 			<%= f.submit "Login", class: "btn btn-primary" %>
+ 			<%= link_to "Register", signup_path, class: "btn btn-outline-info" %>
+ 		<% end %>
+ 	</div>	

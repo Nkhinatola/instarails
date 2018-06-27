@@ -1,0 +1,18 @@
+<div class="well">
+ 	<br />
+ 		<div class = "list-group-item">
+	 		<%= render "posts/header", post: post %>
+		 </div>	
+		<% if post.image.attachment %>
+		 		<%= image_tag post.image, width: 900, class: "img-fluid img-thumbnail" %>
+		 	<% end %>
+		<br />
+	 	<div class = "list-group-item">
+		 	<%= render "likes/likes", post: post %>
+		 	<br />
+		 	<p><%= post.body %></p> 
+		 	<div> <%= distance_of_time_in_words(post.created_at, Time.now)%></div>
+	 	</div>
+	 <br />
+</div> 
+	

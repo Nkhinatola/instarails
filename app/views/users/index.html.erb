@@ -1,20 +1,8 @@
-
-<table>
-  <tr>
-  	<th>Id</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th><th>
-  </tr>
-
+<% count = 1 %>
 <% @users.each do |user| %>
-  <tr>
-  	<td><%= user.id %></td>
-    <td><%= user.username %></td>
-    <td><%= user.email %></td>
-    <td><%= link_to 'Show', user %></td>
-  </tr>
+  <div>
+    <% s = "#{count} : #{user.username}" %>
+    <%= link_to s, user, class: "list-group-item list-group-item-action" %>
+    <% count += 1 %>
+  </div>
 <% end %>
-</table>
-
-<br />

@@ -1,0 +1,14 @@
+
+<nav class="navbar navbar-light bg-light">
+	<% user = post.user %>
+	<div>
+		<% if user.avatar.attachment %>
+	 		<%= image_tag user.avatar, height: 40 %>
+	 	<% end %>
+	    <a class="navbar-brand"> <%= user.username %> </a>
+    </div>
+    <form class="form-inline">
+    	<%= link_to "Delete", post, method: :delete, data: {confirm: "U sure?"} if current_user?(post.user_id) %>
+  	</form>
+</nav>
+ 	
